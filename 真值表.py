@@ -5,36 +5,22 @@ Spyder Editor
 This is a temporary script file.
 """
 
-def generate_truth_table(variables):
-    num_vars = len(variables)
-    table = []
+def truth_table():
+    # 定義P和Q的可能值
+    values = [True, False]
 
-    for i in range(2 ** num_vars):
-        row = []
-        for j in range(num_vars):
-            # 將整數轉換為二進位，然後取第j位的值
-            value = (i >> j) & 1
-            row.append(value)
-        table.append(row)
+    # 列印表頭
+    print("P\tQ\tResult")
+    print("------------------")
 
-    return table
+    # 生成所有可能的組合
+    for p in values:
+        for q in values:
+            # 計算結果（這裡可以修改為你的邏輯表達式）
+            result = p and q
 
-def display_truth_table(variables, truth_table):
-    # 輸出表頭
-    header = " | ".join(variables + ["Result"])
-    print(header)
-    print("-" * len(header))
+            # 列印每一行的數據
+            print(f"{p}\t{q}\t{result}")
 
-    # 輸出每一行
-    for row in truth_table:
-        row_str = " | ".join(map(str, row))
-        print(row_str)
-
-# 設定布林變數
-variables = ["A", "B", "C"]
-
-# 生成真值表
-truth_table = generate_truth_table(variables)
-
-# 顯示真值表
-display_truth_table(variables, truth_table)
+# 執行真值表函數
+truth_table()
