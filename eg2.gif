@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May  2 08:41:02 2024
+
+@author: Student
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+# 定義雙曲正弦函數
+def sinh_curve(x, a, b):
+    return a * np.sinh(b * x)
+
+# 產生x值範圍
+x_values = np.linspace(-5, 5, 100)
+
+# 初始化畫布
+fig, ax = plt.subplots()
+line, = ax.plot([], [], lw=2)
+
+# 設置畫布
+ax.set_xlim(-5, 5)
+ax.set_ylim(-10, 10)
+
+# 初始化函數
+def init():
+    line.set_data([], [])
+    return line,
+
+# 更新函數
+def update(frame):
+    a = np.random.uniform(0.5, 2.0)  # 在範圍[0.5, 2.0]中產生隨機數
+    b = np.random.uniform(0.5, 2.0)  # 在範圍[0.5, 2.0]中產生隨機數
+    y_values = sinh_curve(x_values + frame * 0.1, a, b)
+    line.set_data(x_values, y_values)
+    return line,
+
+# 創建動畫
+ani = FuncAnimation(fig, update, frames=range(60), init_func=init, blit=True)
+
+# 儲存為gif
+ani.save('sinh_curve_animation.gif', writer='imagemagick', fps=10)
+
+plt.show()
